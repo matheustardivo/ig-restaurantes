@@ -1,0 +1,58 @@
+.ui-autocomplete {
+    background-color: white;
+    width: 800px;
+    border: 1px solid #cfcfcf;
+    list-style-type: none;
+    padding-left: 0px;
+    cursor: pointer;
+}
+
+.ui-menu-item {
+  width: 800px;
+}
+
+.ui-corner-all {
+  display: block;
+  width: 800px;
+}
+
+.ui-corner-all a:hover {
+  background-color: #f1f1f1;
+  color: #000;
+}
+
+#map_canvas {
+  width: 800px;
+  height: 200px;
+  border: 1px solid #cfcfcf;
+}
+
+#novo_comentario {
+  width: 800px;
+	padding: 6px 10px;
+	margin: 10px 0 0 0;
+	border: 1px solid #ccc;
+	box-shadow: #ccc 0px 2px 3px;
+	background: #F5F5DC;
+}
+
+.texto_grande {
+  width: 800px;
+}
+
+.restaurante {
+  width: 800px;
+	padding: 6px 10px;
+	margin: 10px 0 0 0;
+	border: 1px solid #ccc;
+	box-shadow: #ccc 0px 2px 3px;
+	background: #F5F5DC;
+}
+
+.comentario {
+  width: 800px;
+	padding: 6px 10px;
+	margin: 10px 0 0 0;
+	border: 1px solid #ccc;
+	box-shadow: #ccc 0px 2px 3px;
+}

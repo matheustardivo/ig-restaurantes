@@ -1,0 +1,29 @@
+<h1>Lista de restaurantes</h1>
+
+<p><%= link_to 'Novo restaurante', new_restaurante_path %></p>
+
+<% @restaurantes.each do |restaurante| %>
+  <%= content_tag_for(:div, restaurante) do %>
+    <div style="float: left; width: 600px;">
+      <h3>(Nota <%= format("%.1f", restaurante.nota_media) %>) <%= restaurante.nome %></h3>
+      <%= restaurante.endereco %>
+    </div>
+    <span style="float: right;">
+      <%= image_tag("http://maps.googleapis.com/maps/api/staticmap?zoom=16&size=180x180&maptype=roadmap&markers=color:red|#{restaurante.latitude},#{restaurante.longitude}&sensor=false") %>
+    </span>
+    <div style="clear: both; text-align: right;">
+      <span style="float: left;">
+        <% if restaurante.comentarios.any? %>
+          <%= pluralize(restaurante.comentarios.count, "comentário") %>
+        <% else %>
+          Nenhum comentário :(
+        <% end %>
+      </span>
+      <%= link_to 'Visualizar', restaurante %> | 
+      <%= link_to 'Editar', edit_restaurante_path(restaurante) %> | 
+      <%= link_to 'Apagar', restaurante, :confirm => 'Você tem certeza?', :method => :delete %>
+    </div>
+  <% end %>
+<% end %>
+
+<br />

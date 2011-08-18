@@ -1,0 +1,53 @@
+<h1>Novo restaurante</h1>
+
+<%= render 'form' %>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var latlng = new google.maps.LatLng(-23.58137, -46.683334);
+    var options = {
+      zoom: 14,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+  
+    var map = new google.maps.Map(document.getElementById("map_canvas"), options);
+  
+    var geocoder = new google.maps.Geocoder();
+    var bounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-23.59137, -46.693334),
+      new google.maps.LatLng(-23.57137, -46.673334));
+    
+    $("#restaurante_endereco").autocomplete({
+      source: function(request, response) {
+        geocoder.geocode({
+          'address': request.term + ' Sao Paulo, SP', 
+          'bounds': bounds, 
+          'region': 'br' 
+        }, 
+        function(results, status) {
+          response($.map(results, function(item) {
+            return {
+              label:  item.formatted_address,
+              value: item.formatted_address,
+              latitude: item.geometry.location.lat(),
+              longitude: item.geometry.location.lng()
+            }
+          }));
+        })
+      },
+    
+      select: function(event, ui) {
+        var location = new google.maps.LatLng(ui.item.latitude, ui.item.longitude);
+        var marker = new google.maps.Marker({
+          map: map,
+          draggable: false
+        });
+        marker.setPosition(location);
+        map.setCenter(location);
+        $("#restaurante_latitude").val(ui.item.latitude);
+        $("#restaurante_longitude").val(ui.item.longitude);
+      }
+    });
+  });
+</script>

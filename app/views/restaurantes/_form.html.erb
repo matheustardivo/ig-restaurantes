@@ -1,0 +1,31 @@
+<%= form_for(@restaurante) do |f| %>
+  <% if @restaurante.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@restaurante.errors.count, "erro") %>:</h2>
+
+      <ul>
+      <% @restaurante.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :nome %><br />
+    <%= f.text_field :nome, :size => 60 %>
+  </div>
+  <div class="field">
+    <%= f.label :endereco %><br />
+    <%= f.text_field :endereco, :class => 'texto_grande' %>
+  </div>
+  
+  <%= hidden_field :restaurante, :latitude %>
+  <%= hidden_field :restaurante, :longitude %>
+  
+  <div id="map_canvas"></div><br />
+  
+  <div class="actions">
+    <%= f.submit 'Enviar' %> ou <%= link_to 'Voltar', restaurantes_path %>
+  </div>
+<% end %>

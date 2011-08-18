@@ -1,0 +1,54 @@
+<%= link_to '<< Voltar para a lista de restaurantes', restaurantes_path %>
+
+<h1><%= @restaurante.nome %></h1>
+
+<p>
+  <b>Endereco:</b>
+  <%= @restaurante.endereco %>
+</p>
+
+<div id="map_canvas"></div><br />
+
+<p>
+  <%= link_to 'Editar', edit_restaurante_path(@restaurante) %> ou 
+  <%= link_to 'Voltar', restaurantes_path %>
+</p>
+
+<% if @restaurante.comentarios.any? %>
+  <h2>Comentários</h2>
+  <% @restaurante.comentarios.each do |comentario| %>
+    <%= render comentario %>
+  <% end %>
+<% end %>
+
+<br />
+<div id="novo_comentario">
+  <h2>Novo comentário</h2>
+  <% if @comentario.errors.any? %>
+    <div id="error_explanation">
+      <h2>Você precisa comentar alguma coisa :(</h2>
+    </div>
+  <% end %>
+  <%= render "comentarios/form" %>
+</div>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    var latlng = new google.maps.LatLng(-23.58137, -46.683334);
+    var options = {
+      zoom: 18,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+  
+    var map = new google.maps.Map(document.getElementById("map_canvas"), options);
+  
+    var location = new google.maps.LatLng(<%= @restaurante.latitude %>, <%= @restaurante.longitude %>);
+    var marker = new google.maps.Marker({
+      map: map,
+      draggable: false
+    });
+    marker.setPosition(location);
+    map.setCenter(location);
+  });
+</script>
