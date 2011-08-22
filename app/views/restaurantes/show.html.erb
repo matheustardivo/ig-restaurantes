@@ -1,17 +1,14 @@
-<%= link_to '<< Voltar para a lista de restaurantes', restaurantes_path %>
-
 <h1><%= @restaurante.nome %></h1>
 
-<p>
-  <b>Endereco:</b>
-  <%= @restaurante.endereco %>
-</p>
+<h3>Nota <%= @restaurante.nota_media %></h3>
+
+<p><%= @restaurante.endereco %></p>
 
 <div id="map_canvas"></div><br />
 
 <p>
-  <%= link_to 'Editar', edit_restaurante_path(@restaurante) %> ou 
-  <%= link_to 'Voltar', restaurantes_path %>
+  <% if user_signed_in? %><%= link_to 'Editar', edit_restaurante_path(@restaurante), :class => "btn primary" %> ou <% end %>
+  <%= link_to 'Voltar', restaurantes_path, :class => "btn" %>
 </p>
 
 <% if @restaurante.comentarios.any? %>
@@ -21,16 +18,18 @@
   <% end %>
 <% end %>
 
+<% if user_signed_in? %>
 <br />
 <div id="novo_comentario">
   <h2>Novo comentário</h2>
   <% if @comentario.errors.any? %>
-    <div id="error_explanation">
-      <h2>Você precisa comentar alguma coisa :(</h2>
+    <div class="alert-message block-message error">
+      <p><strong>Oh snap!</strong> Você precisa comentar alguma coisa :(<p>
     </div>
   <% end %>
   <%= render "comentarios/form" %>
 </div>
+<% end %>
 
 <script type="text/javascript">
   $(document).ready(function() {

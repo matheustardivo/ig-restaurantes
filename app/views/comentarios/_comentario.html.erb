@@ -1,7 +1,9 @@
 <%= content_tag_for(:div, comentario) do %>
   <strong><%= comentario.nome %></strong> achou <strong>nota <%= comentario.nota %></strong>
   <p><%= comentario.texto %></p>
-  <div style="text-align: right;">
-    <%= link_to 'Apagar', [comentario.restaurante, comentario], :confirm => 'Você tem certeza?', :method => :delete %>
-  </div>
+  <% if user_signed_in? %>
+    <div style="text-align: right;">
+      <%= link_to 'Apagar', [comentario.restaurante, comentario], :confirm => 'Você tem certeza?', :method => :delete, :class => "btn" %>
+    </div>
+  <% end %>
 <% end %>

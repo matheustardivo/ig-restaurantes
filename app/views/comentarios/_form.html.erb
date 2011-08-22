@@ -1,17 +1,24 @@
-<%= form_for([@restaurante, Comentario.new]) do |f| %>
-  <div class="field">
-    <%= f.label :nome %><br />
-    <%= f.text_field :nome, :size => 60 %>
-  </div>
-  <div class="field">
-    <%= f.label :nota %><br />
-    <%= select :comentario, :nota, (1..5).to_a, {}, {:style => "width:60px"} %>
-  </div>
-  <div class="field">
-    <%= f.label :texto, "Comentário" %><br />
-    <%= f.text_area :texto, :cols => 80, :rows => 8 %>
-  </div>
-  <div class="actions">
-    <%= f.submit "Enviar" %>
-  </div>
+<%= form_for([@restaurante, @comentario], :html => { :class => "form-stacked" }) do |f| %>
+  <fieldset>
+    <%= hidden_field :comentario, :nome %>
+    <div class="clearfix">
+      <%= f.label :nome %>
+      <div class="input">
+        <%= f.text_field :nome, :class => "xlarge disabled", :disabled => 'disabled' %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :nota %>
+      <div class="input">
+        <%= select :comentario, :nota, (1..5).to_a, {}, {:style => "width:60px"} %>
+      </div>
+    </div>
+    <div class="clearfix">
+      <%= f.label :texto, "Comentário" %>
+      <div class="input">
+        <%= f.text_area :texto, :cols => 80, :rows => 8, :class => "xxlarge" %>
+      </div>
+    </div>
+    <%= f.submit "Enviar", :class => "btn primary" %>
+  </fieldset>
 <% end %>

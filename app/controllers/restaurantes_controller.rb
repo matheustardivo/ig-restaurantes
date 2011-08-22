@@ -15,6 +15,11 @@ class RestaurantesController < ApplicationController
   def show
     @restaurante = Restaurante.find(params[:id])
     @comentario = Comentario.new
+    @comentario.restaurante = @restaurante
+    
+    if user_signed_in?
+      @comentario.nome = current_user[:name]
+    end
 
     respond_to do |format|
       format.html # show.html.erb

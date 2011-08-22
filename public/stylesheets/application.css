@@ -1,56 +1,73 @@
+body {
+  color: #000;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .ui-autocomplete {
-    background-color: white;
-    width: 800px;
-    border: 1px solid #cfcfcf;
-    list-style-type: none;
-    padding-left: 0px;
-    cursor: pointer;
+  background-color: white;
+  width: 530px;
+  border: 1px solid #cfcfcf;
+  list-style-type: none;
+  padding-left: 0px;
+  cursor: pointer;
 }
 
 .ui-menu-item {
-  width: 800px;
+  width: 530px;
 }
 
 .ui-corner-all {
   display: block;
-  width: 800px;
+  width: 530px;
+  color: #000;
 }
 
 .ui-corner-all a:hover {
   background-color: #f1f1f1;
   color: #000;
+  text-decoration: none;
+}
+
+.opcoes-login li {
+  list-style-type: none;
+  display: inline;
+  margin-right: 30px;
+}
+
+form.form-stacked {
+  padding-left: 0;
 }
 
 #map_canvas {
-  width: 800px;
+  width: 940px;
   height: 200px;
   border: 1px solid #cfcfcf;
 }
 
 #novo_comentario {
-  width: 800px;
 	padding: 6px 10px;
 	margin: 10px 0 0 0;
-	border: 1px solid #ccc;
-	box-shadow: #ccc 0px 2px 3px;
-	background: #F5F5DC;
+	border: 1px solid #c0deed;
+	box-shadow: #c0deed 0px 2px 3px;
+	background: #c0deed;
 }
 
 .texto_grande {
-  width: 800px;
+  width: 940px;
 }
 
 .restaurante {
-  width: 800px;
-	padding: 6px 10px;
+	padding: 6px 10px 6px 10px;
 	margin: 10px 0 0 0;
-	border: 1px solid #ccc;
-	box-shadow: #ccc 0px 2px 3px;
-	background: #F5F5DC;
+	border: 1px solid #c0deed;
+	box-shadow: #c0deed 0px 2px 3px;
+	background: #c0deed;
 }
 
 .comentario {
-  width: 800px;
 	padding: 6px 10px;
 	margin: 10px 0 0 0;
 	border: 1px solid #ccc;

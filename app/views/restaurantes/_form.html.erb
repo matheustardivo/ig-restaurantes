@@ -1,7 +1,8 @@
-<%= form_for(@restaurante) do |f| %>
+<%= form_for(@restaurante, :html => { :class => "form-stacked" }) do |f| %>
+
   <% if @restaurante.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@restaurante.errors.count, "erro") %>:</h2>
+    <div class="alert-message block-message error">
+      <p><strong>Oh snap!</strong> Favor verificar os erros abaixo e tentar novamente.<p>
 
       <ul>
       <% @restaurante.errors.full_messages.each do |msg| %>
@@ -11,21 +12,28 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :nome %><br />
-    <%= f.text_field :nome, :size => 60 %>
-  </div>
-  <div class="field">
-    <%= f.label :endereco %><br />
-    <%= f.text_field :endereco, :class => 'texto_grande' %>
-  </div>
+  <fieldset>
+    <div class="clearfix">
+      <%= f.label :nome %>
+      <div class="input">
+        <%= f.text_field :nome, :size => 60 %>
+      </div>
+    </div>
+    
+    <div class="clearfix">
+      <%= f.label :endereco %>
+      <div class="input">
+        <%= f.text_field :endereco, :class => 'xxlarge' %>
+      </div>
+    </div>
+  </fieldset>
   
   <%= hidden_field :restaurante, :latitude %>
   <%= hidden_field :restaurante, :longitude %>
   
   <div id="map_canvas"></div><br />
   
-  <div class="actions">
-    <%= f.submit 'Enviar' %> ou <%= link_to 'Voltar', restaurantes_path %>
+  <div class="well">
+    <%= f.submit 'Enviar', :class => "btn primary" %> ou <%= link_to 'Voltar', restaurantes_path, :class => "btn" %>
   </div>
 <% end %>
