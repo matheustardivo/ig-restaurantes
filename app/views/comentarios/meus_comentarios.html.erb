@@ -1,13 +1,17 @@
 <h1>Meus comentários</h1>
 
-<% @comentarios.each do |comentario| %>
-  <%= content_tag_for(:div, comentario) do %>
-    <h3><%= comentario.restaurante.nome %></h3>
-    <p><strong>Nota <%= comentario.nota %></strong><p>
-    <p><%= comentario.texto %></p>
-    <div style="clear: both;">
-      <%= link_to 'Visualizar', comentario.restaurante, :class => "btn primary" %> 
-      <%= link_to 'Apagar', [comentario.restaurante, comentario], :confirm => 'Você tem certeza?', :method => :delete, :class => "btn" %>
-    </div>
+<% if @comentarios.empty? %>
+  <h2>Sem comentários ainda... :(</h2>
+<% else %>
+  <% @comentarios.each do |comentario| %>
+    <%= content_tag_for(:div, comentario) do %>
+      <h3><%= comentario.restaurante.nome %></h3>
+      <p><strong>Nota <%= comentario.nota %></strong><p>
+      <p><%= comentario.texto %></p>
+      <div style="clear: both;">
+        <%= link_to 'Visualizar', comentario.restaurante, :class => "btn primary" %> 
+        <%= link_to 'Apagar', [comentario.restaurante, comentario], :confirm => 'Você tem certeza?', :method => :delete, :class => "btn" %>
+      </div>
+    <% end %>
   <% end %>
 <% end %>

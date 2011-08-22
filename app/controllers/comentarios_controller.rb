@@ -1,3 +1,4 @@
+# encoding utf-8
 class ComentariosController < ApplicationController
   before_filter :authenticate_user!
   before_filter :pode_manter?, :only => :destroy

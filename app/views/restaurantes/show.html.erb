@@ -11,7 +11,9 @@
   <%= link_to 'Voltar', restaurantes_path, :class => "btn" %>
 </p>
 
-<% if @restaurante.comentarios.any? %>
+<% if @restaurante.comentarios.empty? %>
+  <h2>Sem comentários ainda... :(</h2>
+<% else %>
   <h2>Comentários</h2>
   <% @restaurante.comentarios.each do |comentario| %>
     <%= render comentario %>
