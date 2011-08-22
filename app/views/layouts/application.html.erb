@@ -15,14 +15,14 @@
         <div class="container">
           <h3><%= link_to "iG Restaurantes", root_path %></h3>
           <ul>
-            <li class="active"><a href="#">Restaurantes</a></li>
-            <li><a href="#">Mapa</a></li>
-            <li><a href="#">Meus restaurantes</a></li>
-            <li><a href="#">Meus comentários</a></li>
+            <li<% if request.path =~ /\/restaurantes/ || request.path =~ /\/$/ %> class="active"<% end %>><%= link_to "Restaurantes", restaurantes_path %></li>
+            <li<% if request.path =~ /\/mapa/ %> class="active"<% end %>><a href="#">Mapa</a></li>
             <% if user_signed_in? %>
+              <li<% if request.path =~ /\/meus_restaurantes/ %> class="active"<% end %>><%= link_to "Meus restaurantes", meus_restaurantes_path %></li>
+              <li<% if request.path =~ /\/meus_comentarios/ %> class="active"<% end %>><%= link_to "Meus comentários", meus_comentarios_path %></li>
               <li><%= link_to "Sair", logout_url %></li>
             <% else %>
-              <li><%= link_to "Entrar", login_url %></li>
+              <li<% if request.path =~ /\/login/ %> class="active"<% end %>><%= link_to "Entrar", login_url %></li>
             <% end %>
           </ul>
         </div>
@@ -46,7 +46,7 @@
     <% end %>
   
     <% if user_signed_in? %>
-      <p id="usuario">Olá <%= session[:user][:name] %></p>
+      <p id="usuario">Olá <%= current_user.name %></p>
     <% end %>
   
     <%= yield %>

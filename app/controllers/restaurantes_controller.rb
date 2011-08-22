@@ -1,6 +1,8 @@
 class RestaurantesController < ApplicationController
-  # GET /restaurantes
-  # GET /restaurantes.xml
+  
+  before_filter :authenticate_user!, :except => [:index, :show]
+  before_filter :pode_manter?, :only => [:edit, :update, :destroy]
+
   def index
     @restaurantes = Restaurante.all(:order => "nome")
 
@@ -9,9 +11,16 @@ class RestaurantesController < ApplicationController
       format.xml  { render :xml => @restaurantes }
     end
   end
+  
+  def meus_restaurantes
+    @restaurantes = Restaurante.order("nome").find_all_by_user_id(current_user.id)
 
-  # GET /restaurantes/1
-  # GET /restaurantes/1.xml
+    respond_to do |format|
+      format.html # index.html.erb
+      format.xml  { render :xml => @restaurantes }
+    end
+  end
+  
   def show
     @restaurante = Restaurante.find(params[:id])
     @comentario = Comentario.new
@@ -27,8 +36,6 @@ class RestaurantesController < ApplicationController
     end
   end
 
-  # GET /restaurantes/new
-  # GET /restaurantes/new.xml
   def new
     @restaurante = Restaurante.new
 
@@ -38,19 +45,17 @@ class RestaurantesController < ApplicationController
     end
   end
 
-  # GET /restaurantes/1/edit
   def edit
     @restaurante = Restaurante.find(params[:id])
   end
 
-  # POST /restaurantes
-  # POST /restaurantes.xml
   def create
     @restaurante = Restaurante.new(params[:restaurante])
+    @restaurante.user = current_user
 
     respond_to do |format|
       if @restaurante.save
-        format.html { redirect_to(@restaurante, :notice => 'Restaurante was successfully created.') }
+        format.html { redirect_to(@restaurante, :notice => 'Restaurante criado com sucesso.') }
         format.xml  { render :xml => @restaurante, :status => :created, :location => @restaurante }
       else
         format.html { render :action => "new" }
@@ -59,14 +64,12 @@ class RestaurantesController < ApplicationController
     end
   end
 
-  # PUT /restaurantes/1
-  # PUT /restaurantes/1.xml
   def update
     @restaurante = Restaurante.find(params[:id])
 
     respond_to do |format|
       if @restaurante.update_attributes(params[:restaurante])
-        format.html { redirect_to(@restaurante, :notice => 'Restaurante was successfully updated.') }
+        format.html { redirect_to(@restaurante, :notice => 'Restaurante editado com sucesso.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -75,15 +78,20 @@ class RestaurantesController < ApplicationController
     end
   end
 
-  # DELETE /restaurantes/1
-  # DELETE /restaurantes/1.xml
   def destroy
     @restaurante = Restaurante.find(params[:id])
     @restaurante.destroy
 
     respond_to do |format|
-      format.html { redirect_to(restaurantes_url) }
+      format.html { redirect_to(restaurantes_url, :notice => 'Restaurante removido com sucesso.') }
       format.xml  { head :ok }
     end
   end
+  
+  private
+    def pode_manter?
+      unless current_user.pode_manter?(Restaurante.find(params[:id]))
+        redirect_to root_url, :alert => "Você não pode editar esse restaurante."
+      end
+    end
 end

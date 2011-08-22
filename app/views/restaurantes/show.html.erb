@@ -1,13 +1,13 @@
 <h1><%= @restaurante.nome %></h1>
 
-<h3>Nota <%= @restaurante.nota_media %></h3>
+<h3>Nota <%= format("%.1f", @restaurante.nota_media) %></h3>
 
 <p><%= @restaurante.endereco %></p>
 
 <div id="map_canvas"></div><br />
 
 <p>
-  <% if user_signed_in? %><%= link_to 'Editar', edit_restaurante_path(@restaurante), :class => "btn primary" %> ou <% end %>
+  <% if user_signed_in? && current_user.pode_manter?(@restaurante) %><%= link_to 'Editar', edit_restaurante_path(@restaurante), :class => "btn primary" %> ou <% end %>
   <%= link_to 'Voltar', restaurantes_path, :class => "btn" %>
 </p>
 

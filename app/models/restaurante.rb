@@ -1,6 +1,7 @@
 # encoding: utf-8
 class Restaurante < ActiveRecord::Base
   has_many :comentarios, :order => 'created_at desc'
+  belongs_to :user
   
   validates_presence_of :nome, :endereco, :message => "não pode ser vazio"
   

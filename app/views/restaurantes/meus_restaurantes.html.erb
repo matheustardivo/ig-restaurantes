@@ -1,6 +1,4 @@
-<h1>Lista de restaurantes</h1>
-
-<% if user_signed_in? %><p><%= link_to 'Novo restaurante', new_restaurante_path, :class => "btn" %></p><% end %>
+<h1>Meus restaurantes</h1>
 
 <% @restaurantes.each do |restaurante| %>
   <%= content_tag_for(:div, restaurante) do %>

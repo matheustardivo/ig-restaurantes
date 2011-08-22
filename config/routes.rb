@@ -8,5 +8,8 @@ Restaurantes::Application.routes.draw do
   match '/logout' => 'sessions#destroy', :as => :logout
   match '/login' => 'sessions#new', :as => :login
   
+  get '/meus_restaurantes' => 'restaurantes#meus_restaurantes', :as => :meus_restaurantes
+  get '/meus_comentarios' => 'comentarios#meus_comentarios', :as => :meus_comentarios
+  
   root :to => "restaurantes#index"
 end
